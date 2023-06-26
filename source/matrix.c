@@ -41,6 +41,20 @@ Matrix* new_matrix_square_default(int size)
     return new_matrix_default(size, size);
 }
 
+Matrix* new_matrix_square_scalar(int size, Fraction* frac)
+{
+    Matrix* matrix = new_matrix_square(size);
+
+    for (int i = 0; i < matrix->row; i++)
+        for (int j = 0; j < matrix->col; j++)
+            if (i == j)
+                matrix->elems[i][j] = copy_fraction(frac);
+            else
+                matrix->elems[i][j] = new_fraction_default();
+
+    return matrix;
+}
+
 void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {
