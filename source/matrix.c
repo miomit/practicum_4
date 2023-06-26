@@ -20,6 +20,11 @@ Matrix* new_matrix(int row, int col)
     return matrix;
 }
 
+Matrix* new_matrix_square(int size)
+{
+    return new_matrix(size, size);
+}
+
 Matrix* new_matrix_default(int row, int col)
 {
     Matrix* matrix = new_matrix(row, col);
