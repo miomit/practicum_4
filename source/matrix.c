@@ -19,6 +19,17 @@ Matrix* new_matrix(int row, int col)
     return matrix;
 }
 
+Matrix* new_matrix_default(int row, int col)
+{
+    Matrix* matrix = new_matrix(row, col);
+
+    for (int i = 0; i < matrix->row; i++)
+        for (int j = 0; j < matrix->col; j++)
+            matrix->elems[i][j] = new_fraction_default();
+
+    return matrix;
+}
+
 void destroy_matrix(Matrix* matrix)
 {
     if (matrix != NULL){
