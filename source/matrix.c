@@ -1,5 +1,6 @@
 #include "./header/matrix.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 Matrix* new_matrix(int row, int col)
 {
@@ -28,6 +29,17 @@ Matrix* new_matrix_default(int row, int col)
             matrix->elems[i][j] = new_fraction_default();
 
     return matrix;
+}
+
+void print_matrix(Matrix* matrix)
+{
+    for (int i = 0; i < matrix->row; i++) {
+        for (int j = 0; j < matrix->col; j++) {
+            print_fraction(matrix->elems[i][j]);
+            printf("\t");
+        }
+        printf("\n");
+    }
 }
 
 void destroy_matrix(Matrix* matrix)
