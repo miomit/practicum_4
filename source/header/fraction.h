@@ -9,6 +9,8 @@ Fraction* new_fraction(int numerator, int denominator);
 Fraction* new_fraction_num(int numerator);
 Fraction* new_fraction_default();
 
+Fraction* copy_fraction(Fraction* frac);
+
 Fraction* cut_fraction(Fraction* frac);
 
 Fraction* neg_fraction(Fraction* frac);

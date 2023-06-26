@@ -34,6 +34,11 @@ Fraction* new_fraction_default()
     return new_fraction_num(0);
 }
 
+Fraction* copy_fraction(Fraction* frac)
+{
+    return new_fraction(frac->numerator, frac->denominator);
+}
+
 Fraction* cut_fraction(Fraction* frac)
 {
     int gcd = nod(frac->numerator, frac->denominator);
