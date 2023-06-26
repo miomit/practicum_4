@@ -36,6 +36,11 @@ Matrix* new_matrix_default(int row, int col)
     return matrix;
 }
 
+Matrix* new_matrix_square_default(int size)
+{
+    return new_matrix_default(size, size);
+}
+
 void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {
