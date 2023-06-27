@@ -3,6 +3,8 @@
 
 void fraction_test();
 
+void new_new_fraction_str_test();
+
 void cut_test();
 void pow_test();
 void add_test();

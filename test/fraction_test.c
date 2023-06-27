@@ -11,6 +11,39 @@ void fraction_test()
     sub_test();
     mul_test();
     div_test();
+
+    new_new_fraction_str_test();
+}
+
+void new_new_fraction_str_test()
+{
+    Fraction* l = new_fraction_str("1/1");
+    Fraction* r = new_fraction_num(1);
+
+    assert(is_equal_fraction(l, r));
+
+    destroy_fraction(l); destroy_fraction(r);
+
+    l = new_fraction_str("-123/87");
+    r = new_fraction(-123, 87);
+
+    assert(is_equal_fraction(l, r));
+
+    destroy_fraction(l); destroy_fraction(r);
+
+    l = new_fraction_str("1");
+    r = new_fraction_num(1);
+
+    assert(is_equal_fraction(l, r));
+
+    destroy_fraction(l); destroy_fraction(r);
+
+    l = new_fraction_str("-1");
+    r = new_fraction_num(-1);
+
+    assert(is_equal_fraction(l, r));
+
+    destroy_fraction(l); destroy_fraction(r);
 }
 
 void cut_test()
