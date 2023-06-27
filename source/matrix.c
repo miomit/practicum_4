@@ -60,6 +60,11 @@ Matrix* new_matrix_square_identity(int size)
     return new_matrix_square_scalar(size, new_fraction_num(1));
 }
 
+void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
+{
+    set_fraction(matrix->elems[row][col], new_elem);
+}
+
 void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {

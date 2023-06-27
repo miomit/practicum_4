@@ -12,6 +12,8 @@ Matrix* new_matrix_square_default(int size);
 Matrix* new_matrix_square_scalar(int size, Fraction* frac);
 Matrix* new_matrix_square_identity(int size);
 
+void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
+
 void print_matrix(Matrix* matrix);
 
 void destroy_matrix(Matrix* matrix);
