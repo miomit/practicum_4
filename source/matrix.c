@@ -166,6 +166,20 @@ void swap_columns_matrix(Matrix* matrix, int col1, int col2)
     }
 }
 
+void mul_frac_row_matrix(Matrix* matrix, int row, Fraction* frac)
+{
+    for (int col = 0; col < matrix->col; col++)
+    {
+        set_elem_matrix(matrix, row, col,
+                        mul_fraction(
+                                matrix->elems[row][col],
+                                frac
+                                ));
+    }
+
+    destroy_fraction(frac);
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);
