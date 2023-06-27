@@ -74,6 +74,17 @@ Matrix* copy_matrix(Matrix* matrix)
     return matrix_copy;
 }
 
+Matrix* transform_matrix(Matrix* matrix)
+{
+    Matrix* matrix_res = new_matrix(matrix->col, matrix->row);
+
+    for (int i = 0; i < matrix->row; i++)
+        for (int j = 0; j < matrix->col; j++)
+            matrix_res->elems[j][i] = matrix->elems[i][j];
+
+    return matrix_res;
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);
