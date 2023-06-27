@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:grid x="0" y="0" width="20" height="20"/>
+  </defs>
+  <rect x="40" y="40" width="20" height="420" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <rect x="60" y="40" width="40" height="20" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <rect x="60" y="440" width="40" height="20" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <rect x="440" y="40" width="20" height="420" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <rect x="400" y="440" width="40" height="20" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <rect x="400" y="40" width="40" height="20" style="stroke: rgb(0, 0, 0); paint-order: fill; stroke-miterlimit: 24; stroke-linejoin: round; stroke-linecap: round; stroke-width: 0px;"/>
+  <text style="font-family: Arial, sans-serif; font-size: 152.3px; paint-order: fill; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 24; stroke-width: 0px; white-space: pre;" x="100" y="197.655">A</text>
+  <text style="font-family: Arial, sans-serif; font-size: 152.3px; paint-order: fill; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 24; stroke-width: 0px; white-space: pre;" x="298.424" y="197.655">B</text>
+  <text style="font-family: Arial, sans-serif; font-size: 152.3px; paint-order: fill; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 24; stroke-width: 0px; white-space: pre;" x="100" y="408.028">C</text>
+  <text style="font-family: Arial, sans-serif; font-size: 152.3px; paint-order: fill; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 24; stroke-width: 0px; white-space: pre;" x="290.014" y="408.028">D</text>
+</svg>
