@@ -60,6 +60,20 @@ Matrix* new_matrix_square_identity(int size)
     return new_matrix_square_scalar(size, new_fraction_num(1));
 }
 
+Matrix* copy_matrix(Matrix* matrix)
+{
+    Matrix* matrix_copy = new_matrix_default(matrix->row, matrix->col);
+
+    for (int i = 0; i < matrix->row; i++)
+        for (int j = 0; j < matrix->col; j++)
+            set_elem_matrix(matrix_copy,
+                            i,
+                            j,
+                            copy_fraction(matrix->elems[i][j]));
+
+    return matrix_copy;
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);
