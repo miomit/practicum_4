@@ -132,6 +132,20 @@ Matrix* sub_matrix(Matrix* matrix1, Matrix* matrix2)
     return matrix_res;
 }
 
+Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac)
+{
+    Matrix* matrix_res = new_matrix(matrix->row, matrix->col);
+
+    for (int i = 0; i < matrix_res->row; i++)
+        for (int j = 0; j < matrix_res->col; j++)
+            matrix_res->elems[i][j] = mul_fraction(
+                    matrix->elems[i][j],
+                    frac
+            );
+
+    return matrix_res;
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);
