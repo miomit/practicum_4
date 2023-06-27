@@ -182,6 +182,20 @@ void mul_frac_row_matrix(Matrix* matrix, int row, Fraction* frac)
     destroy_fraction(frac);
 }
 
+void mul_frac_column_matrix(Matrix* matrix, int col, Fraction* frac)
+{
+    for (int row = 0; row < matrix->row; row++)
+    {
+        set_elem_matrix(matrix, row, col,
+                        mul_fraction(
+                                matrix->elems[row][col],
+                                frac
+                        ));
+    }
+
+    destroy_fraction(frac);
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);

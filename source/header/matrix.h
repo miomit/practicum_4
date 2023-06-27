@@ -24,6 +24,7 @@ Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac);
 void swap_rows_matrix(Matrix* matrix, int row1, int row2);
 void swap_columns_matrix(Matrix* matrix, int col1, int col2);
 void mul_frac_row_matrix(Matrix* matrix, int row, Fraction* frac);
+void mul_frac_column_matrix(Matrix* matrix, int col, Fraction* frac);
 
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 
