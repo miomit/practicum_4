@@ -22,6 +22,7 @@ Matrix* sub_matrix(Matrix* matrix1, Matrix* matrix2);
 Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac);
 
 void swap_rows(Matrix* matrix, int row1, int row2);
+void swap_columns(Matrix* matrix, int col1, int col2);
 
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 
