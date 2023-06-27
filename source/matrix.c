@@ -79,6 +79,19 @@ void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
     set_fraction(matrix->elems[row][col], new_elem);
 }
 
+bool is_equal_matrix(Matrix* matrix1, Matrix* matrix2)
+{
+    if (matrix1->row != matrix2->row || matrix1->col != matrix2->col)
+        return false;
+
+    for (int i = 0; i < matrix1->row; i++)
+        for (int j = 0; j < matrix1->col; j++)
+            if (!is_equal_fraction(matrix1->elems[i][j], matrix2->elems[i][j]))
+                return false;
+
+    return true;
+}
+
 void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {
