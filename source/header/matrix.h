@@ -17,6 +17,7 @@ Matrix* copy_matrix(Matrix* matrix);
 Matrix* transform_matrix(Matrix* matrix);
 
 Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2);
+Matrix* add_matrix(Matrix* matrix1, Matrix* matrix2);
 
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 

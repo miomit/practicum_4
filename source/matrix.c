@@ -104,6 +104,20 @@ Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2)
     return matrix_res;
 }
 
+Matrix* add_matrix(Matrix* matrix1, Matrix* matrix2)
+{
+    Matrix* matrix_res = new_matrix(matrix1->row, matrix1->col);
+
+    for (int i = 0; i < matrix_res->row; i++)
+        for (int j = 0; j < matrix_res->col; j++)
+            matrix_res->elems[i][j] = add_fraction(
+                    matrix1->elems[i][j],
+                    matrix2->elems[i][j]
+                    );
+
+    return matrix_res;
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);
