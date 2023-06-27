@@ -146,7 +146,7 @@ Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac)
     return matrix_res;
 }
 
-void swap_rows(Matrix* matrix, int row1, int row2)
+void swap_rows_matrix(Matrix* matrix, int row1, int row2)
 {
     for (int col = 0; col < matrix->col; col++)
     {
@@ -156,7 +156,7 @@ void swap_rows(Matrix* matrix, int row1, int row2)
     }
 }
 
-void swap_columns(Matrix* matrix, int col1, int col2)
+void swap_columns_matrix(Matrix* matrix, int col1, int col2)
 {
     for (int row = 0; row < matrix->row; row++)
     {
