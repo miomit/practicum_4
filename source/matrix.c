@@ -55,6 +55,11 @@ Matrix* new_matrix_square_scalar(int size, Fraction* frac)
     return matrix;
 }
 
+Matrix* new_matrix_square_identity(int size)
+{
+    return new_matrix_square_scalar(size, new_fraction_num(1));
+}
+
 void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {
