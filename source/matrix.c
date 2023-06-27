@@ -85,6 +85,25 @@ Matrix* transform_matrix(Matrix* matrix)
     return matrix_res;
 }
 
+Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2)
+{
+    Matrix* matrix_res = new_matrix_default(matrix1->row, matrix2->col);
+
+    for (int i = 0; i < matrix_res->row; i++)
+        for (int j = 0; j < matrix_res->col; j++)
+            for (int k = 0; k < matrix1->col; k++)
+                set_elem_matrix(matrix_res, i, j,
+                                add_fraction(
+                                        matrix_res->elems[i][j],
+                                        add_fraction(
+                                                matrix1->elems[i][k],
+                                                matrix2->elems[k][j]
+                                                )
+                                        ));
+
+    return matrix_res;
+}
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
 {
     set_fraction(matrix->elems[row][col], new_elem);

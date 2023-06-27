@@ -16,6 +16,8 @@ Matrix* copy_matrix(Matrix* matrix);
 
 Matrix* transform_matrix(Matrix* matrix);
 
+Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2);
+
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 
 bool is_equal_matrix(Matrix* matrix1, Matrix* matrix2);
