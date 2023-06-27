@@ -143,6 +143,8 @@ Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac)
                     frac
             );
 
+    destroy_fraction(frac);
+
     return matrix_res;
 }
 
