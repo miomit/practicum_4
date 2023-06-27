@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "header/algebra.h"
 
@@ -32,6 +33,39 @@ Fraction* new_fraction_num(int numerator)
 Fraction* new_fraction_default()
 {
     return new_fraction_num(0);
+}
+
+Fraction* new_fraction_str(const char* str)
+{
+    int numerator = 1, denominator = 1;
+
+    bool is_frac = false;
+    for (int i = 0; i < strlen(str); i++)
+        if (str[i] == '/') {
+            is_frac = true;
+            // numerator
+            char * n_c = malloc(i+1);
+            for (int j = 0; j < i; j++)
+                n_c[j] = str[j];
+
+            sscanf(n_c, "%d", &numerator);
+            free(n_c);
+
+            //denominator
+            char * d_c = malloc(strlen(str)-(i+1));
+            for (int j = 0; j < strlen(str); j++)
+                d_c[j] = str[j + i+1];
+
+            sscanf(d_c, "%d", &denominator);
+            free(d_c);
+            break;
+        }
+
+    if (!is_frac){
+        sscanf(str, "%d", &numerator);
+    }
+
+    return new_fraction(numerator, denominator);
 }
 
 Fraction* copy_fraction(Fraction* frac)
