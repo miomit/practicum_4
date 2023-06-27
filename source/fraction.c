@@ -91,7 +91,8 @@ int get_denominator_fraction(Fraction* frac)
 void set_fraction(Fraction* old_frack, Fraction* new_frack)
 {
     destroy_fraction(old_frack);
-    *old_frack = *new_frack;
+    old_frack = copy_fraction(new_frack);
+    destroy_fraction(new_frack);
 }
 
 bool is_zero_fraction(Fraction* frac)
