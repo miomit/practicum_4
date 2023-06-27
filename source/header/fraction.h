@@ -24,6 +24,8 @@ double result_fraction(Fraction* frac);
 int get_numerator_fraction(Fraction* frac);
 int get_denominator_fraction(Fraction* frac);
 
+void set_fraction(Fraction* old_frack, Fraction* new_frack);
+
 bool is_zero_fraction(Fraction* frac);
 
 void destroy_fraction(Fraction* frac);
