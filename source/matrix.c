@@ -240,6 +240,67 @@ void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fract
     destroy_fraction(frac);
 }
 
+Matrix* inv_matrix(Matrix* matrix)
+{
+    Matrix* res = new_matrix_square_identity(matrix->row);
+
+    for (int dioganal = 0; dioganal < matrix->row; dioganal++) {
+        if (is_zero_fraction(get_elem_matrix(matrix, dioganal, dioganal))) {
+            int row_no_zero_elem = -1;
+
+            for (int i = 1; i < matrix->row - dioganal; i++) {
+                if (!is_zero_fraction(get_elem_matrix(matrix, dioganal + i, dioganal))) {
+                    row_no_zero_elem = dioganal + i;
+                    break;
+                }
+            }
+
+            if (row_no_zero_elem != -1) {
+                swap_rows_matrix(res, dioganal, row_no_zero_elem);
+                swap_rows_matrix(matrix, dioganal, row_no_zero_elem);
+            }
+        }
+
+        Fraction* inverse_diagonal_element = inv_fraction(get_elem_matrix(matrix, dioganal, dioganal));
+
+        mul_frac_row_matrix(res, dioganal, copy_fraction(inverse_diagonal_element));
+        mul_frac_row_matrix(matrix, dioganal, copy_fraction(inverse_diagonal_element));
+
+        for (int i = 1; i < matrix->row - dioganal; i++)
+        {
+            row_add_row_mul_frac_matrix(res,
+                                        dioganal + i,
+                                        dioganal,
+                                        neg_fraction(get_elem_matrix(matrix, dioganal + i, dioganal)));
+
+            row_add_row_mul_frac_matrix(matrix,
+                                        dioganal + i,
+                                        dioganal,
+                                        neg_fraction(get_elem_matrix(matrix, dioganal + i, dioganal)));
+        }
+    }
+
+    for (int dioganal = matrix->row - 1; dioganal >= 0; dioganal--)
+    {
+        for (int i = 1; i <= dioganal; i++)
+        {
+            row_add_row_mul_frac_matrix(res,
+                                        dioganal - i,
+                                        dioganal,
+                                        neg_fraction(get_elem_matrix(matrix, dioganal - i, dioganal)));
+
+            row_add_row_mul_frac_matrix(matrix,
+                                        dioganal - i,
+                                        dioganal,
+                                        neg_fraction(get_elem_matrix(matrix, dioganal - i, dioganal)));
+        }
+    }
+
+    destroy_matrix(matrix);
+
+    return res;
+}
+
 Fraction* det_matrix(Matrix* matrix)
 {
     Fraction* lambda = new_fraction_num(1);
