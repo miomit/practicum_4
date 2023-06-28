@@ -31,6 +31,8 @@ void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fract
 Matrix* inv_matrix(Matrix* matrix);
 Fraction* det_matrix(Matrix* matrix);
 
+Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2);
+
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col);
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 

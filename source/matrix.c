@@ -352,6 +352,24 @@ Fraction* det_matrix(Matrix* matrix)
     return cut_fraction(inv_fraction(lambda));
 }
 
+Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2)
+{
+    Matrix* matrix_res = new_matrix(matrix1->row + matrix2->row, matrix1->col);
+
+    for (int i = 0; i < matrix1->row; i++)
+        for (int j = 0; j < matrix1->col; j++)
+            matrix_res->elems[i][j] = get_elem_matrix(matrix1, i, j);
+
+    for (int i = 0; i < matrix2->row; i++)
+        for (int j = 0; j < matrix2->col; j++)
+            matrix_res->elems[matrix1->row + i][j] = get_elem_matrix(matrix2, i, j);
+
+    destroy_matrix(matrix1);
+    destroy_matrix(matrix2);
+
+    return matrix_res;
+}
+
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col)
 {
     return copy_fraction(matrix->elems[row][col]);
