@@ -161,36 +161,44 @@ bool is_equal_fraction(Fraction* frac1, Fraction* frac2)
 
 Fraction* add_fraction(Fraction* frac, Fraction* other)
 {
-    frac->numerator = frac->numerator * other->denominator + other->numerator * frac->denominator;
-    frac->denominator = frac->denominator * other->denominator;
+    Fraction* frac_res = new_fraction(
+            frac->numerator * other->denominator + other->numerator * frac->denominator,
+            frac->denominator * other->denominator
+            );
     destroy_fraction(frac);
     destroy_fraction(other);
-    return cut_fraction(frac);
+    return cut_fraction(frac_res);
 }
 
 Fraction* sub_fraction(Fraction* frac, Fraction* other)
 {
-    frac->numerator = frac->numerator * other->denominator - other->numerator * frac->denominator;
-    frac->denominator = frac->denominator * other->denominator;
+    Fraction* frac_res = new_fraction(
+            frac->numerator * other->denominator - other->numerator * frac->denominator,
+            frac->denominator * other->denominator
+            );
     destroy_fraction(frac);
     destroy_fraction(other);
-    return cut_fraction(frac);
+    return cut_fraction(frac_res);
 }
 
 Fraction* mul_fraction(Fraction* frac, Fraction* other)
 {
-    frac->numerator = frac->numerator * other->numerator;
-    frac->denominator = frac->denominator * other->denominator;
+    Fraction* frac_res = new_fraction(
+            frac->numerator * other->numerator,
+            frac->denominator * other->denominator
+            );
     destroy_fraction(frac);
     destroy_fraction(other);
-    return cut_fraction(frac);
+    return cut_fraction(frac_res);
 }
 
 Fraction* div_fraction(Fraction* frac, Fraction* other)
 {
-    frac->numerator = frac->numerator * other->denominator;
-    frac->denominator = frac->denominator * other->numerator;
+    Fraction* frac_res = new_fraction(
+            frac->numerator * other->denominator,
+            frac->denominator * other->numerator
+            );
     destroy_fraction(frac);
     destroy_fraction(other);
-    return cut_fraction(frac);
+    return cut_fraction(frac_res);
 }
