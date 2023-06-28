@@ -240,6 +240,55 @@ void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fract
     destroy_fraction(frac);
 }
 
+Fraction* det(Matrix* matrix)
+{
+    Fraction* lambda = new_fraction_num(1);
+
+    for (int dioganal = 0; dioganal < matrix->row; dioganal++)
+    {
+        if (is_zero_fraction(get_elem_matrix(matrix, dioganal, dioganal)))
+        {
+            int row_no_zero_elem = -1;
+
+            for (int i = 1; i < matrix->row - dioganal; i++)
+            {
+                if (!is_zero_fraction(get_elem_matrix(matrix, dioganal + i, dioganal)))
+                {
+                    row_no_zero_elem = dioganal + i;
+                    break;
+                }
+            }
+
+            if (row_no_zero_elem != -1)
+            {
+                neg_fraction(lambda);
+                swap_rows_matrix(matrix, dioganal, row_no_zero_elem);
+            }
+            else
+            {
+                set_fraction(lambda, new_fraction_default());
+                break;
+            }
+        }
+
+        Fraction* inverse_diagonal_element = inv_fraction(get_elem_matrix(matrix, dioganal, dioganal));
+
+        mul_frac_row_matrix(matrix, dioganal, copy_fraction(inverse_diagonal_element));
+
+        lambda = mul_fraction(lambda, inverse_diagonal_element);
+
+        for (int i = 1; i < matrix->row - dioganal; i++)
+        {
+            row_add_row_mul_frac_matrix(matrix,
+                                        dioganal + i,
+                                        dioganal,
+                                        neg_fraction(get_elem_matrix(matrix, dioganal + i, dioganal)));
+        }
+    }
+
+    return inv_fraction(lambda);
+}
+
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col)
 {
     return copy_fraction(matrix->elems[row][col]);
