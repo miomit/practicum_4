@@ -301,6 +301,84 @@ Matrix* inv_matrix(Matrix* matrix)
     return res;
 }
 
+Matrix* inv_block_matrix(Matrix* matrix)
+{
+    int row_d = matrix->row / 2;
+    int col_d = matrix->col / 2;
+
+    Matrix* A = block_4_4(copy_matrix(matrix), row_d, col_d, 0);
+    Matrix* B = block_4_4(copy_matrix(matrix), row_d, col_d, 1);
+    Matrix* C = block_4_4(copy_matrix(matrix), row_d, col_d, 2);
+    Matrix* D = block_4_4(copy_matrix(matrix), row_d, col_d, 3);
+
+    Matrix* A_inv = inv_matrix(copy_matrix(A));
+
+    Matrix* H = inv_matrix(
+        sub_matrix(
+            copy_matrix(D),
+            mul_matrix(
+                    copy_matrix(C),
+                    mul_matrix(
+                            copy_matrix(A_inv),
+                            copy_matrix(B)
+                    )
+            )
+    ));
+
+    Matrix* A_res = add_matrix(
+            copy_matrix(A_inv),
+            mul_matrix(
+                    copy_matrix(A_inv),
+                    mul_matrix(
+                            copy_matrix(B),
+                            mul_matrix(
+                                    copy_matrix(H),
+                                    mul_matrix(
+                                            copy_matrix(C),
+                                            copy_matrix(A_inv)
+                                            )
+                                    )
+                            )
+                    )
+            );
+
+    Matrix* B_res = mul_frac_matrix(
+            mul_matrix(
+                    copy_matrix(A_inv),
+                    mul_matrix(
+                            copy_matrix(B),
+                            copy_matrix(H)
+                            )
+                    ),
+            new_fraction_num(-1)
+            );
+
+    Matrix* C_res = mul_frac_matrix(
+            mul_matrix(
+                    copy_matrix(H),
+                    mul_matrix(
+                            copy_matrix(C),
+                            copy_matrix(A_inv)
+                            )
+            ),
+            new_fraction_num(-1)
+    );
+
+    Matrix* D_res = copy_matrix(H);
+
+    destroy_matrix(A);
+    destroy_matrix(B);
+    destroy_matrix(C);
+    destroy_matrix(D);
+    destroy_matrix(H);
+    destroy_matrix(matrix);
+
+    return append_v_matrix(
+            append_h_matrix(A_res, B_res),
+            append_h_matrix(C_res, D_res)
+            );
+}
+
 Fraction* det_matrix(Matrix* matrix)
 {
     Fraction* lambda = new_fraction_num(1);
@@ -350,6 +428,31 @@ Fraction* det_matrix(Matrix* matrix)
     destroy_matrix(matrix);
 
     return cut_fraction(inv_fraction(lambda));
+}
+
+Fraction* det_block_matrix(Matrix* matrix)
+{
+    int row_d = matrix->row / 2;
+    int col_d = matrix->col / 2;
+
+    Matrix* A = block_4_4(copy_matrix(matrix), row_d, col_d, 0);
+    Matrix* B = block_4_4(copy_matrix(matrix), row_d, col_d, 1);
+    Matrix* C = block_4_4(copy_matrix(matrix), row_d, col_d, 2);
+    Matrix* D = block_4_4(copy_matrix(matrix), row_d, col_d, 3);
+
+    Fraction* det_a = det_matrix(copy_matrix(A));
+
+    return mul_fraction(det_a,  det_matrix(
+            sub_matrix(
+                D,
+                mul_matrix(
+                        C,
+                        mul_matrix(
+                                inv_matrix(A),
+                                B
+                                )
+                        )
+                )));
 }
 
 Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2)

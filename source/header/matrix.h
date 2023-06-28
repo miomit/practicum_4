@@ -29,7 +29,9 @@ void row_add_row_mul_frac_matrix(Matrix* matrix, int row1, int row2, Fraction* f
 void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fraction* frac);
 
 Matrix* inv_matrix(Matrix* matrix);
+Matrix* inv_block_matrix(Matrix* matrix);
 Fraction* det_matrix(Matrix* matrix);
+Fraction* det_block_matrix(Matrix* matrix);
 
 Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2);
 Matrix* append_h_matrix(Matrix* matrix1, Matrix* matrix2);
