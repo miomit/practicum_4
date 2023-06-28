@@ -109,7 +109,9 @@ Fraction* inv_fraction(Fraction* frac)
 
 double result_fraction(Fraction* frac)
 {
-    return (double)frac->numerator / (double)frac->denominator;
+    double res = (double)frac->numerator / (double)frac->denominator;
+    destroy_fraction(frac);
+    return res;
 }
 
 int get_numerator_fraction(Fraction* frac)
@@ -131,7 +133,9 @@ void set_fraction(Fraction* old_frack, Fraction* new_frack)
 
 bool is_zero_fraction(Fraction* frac)
 {
-    return frac->numerator == 0 ? true : false;
+    bool res = frac->numerator == 0 ? true : false;
+    destroy_fraction(frac);
+    return res;
 }
 
 void destroy_fraction(Fraction* frac)
@@ -144,18 +148,23 @@ void print_fraction(Fraction* frac)
     printf("%d", frac->numerator);
     if (frac->denominator != 1 && frac->numerator != 0) 
         printf("/%d", frac->denominator);
+    destroy_fraction(frac);
 }
 
 bool is_equal_fraction(Fraction* frac1, Fraction* frac2)
 {
-    return frac1->numerator*frac2->denominator == frac1->denominator * frac2->numerator;
+    bool res = frac1->numerator*frac2->denominator == frac1->denominator * frac2->numerator;
+    destroy_fraction(frac1);
+    destroy_fraction(frac2);
+    return res;
 }
 
 Fraction* add_fraction(Fraction* frac, Fraction* other)
 {
     frac->numerator = frac->numerator * other->denominator + other->numerator * frac->denominator;
     frac->denominator = frac->denominator * other->denominator;
-
+    destroy_fraction(frac);
+    destroy_fraction(other);
     return cut_fraction(frac);
 }
 
@@ -163,7 +172,8 @@ Fraction* sub_fraction(Fraction* frac, Fraction* other)
 {
     frac->numerator = frac->numerator * other->denominator - other->numerator * frac->denominator;
     frac->denominator = frac->denominator * other->denominator;
-
+    destroy_fraction(frac);
+    destroy_fraction(other);
     return cut_fraction(frac);
 }
 
@@ -171,7 +181,8 @@ Fraction* mul_fraction(Fraction* frac, Fraction* other)
 {
     frac->numerator = frac->numerator * other->numerator;
     frac->denominator = frac->denominator * other->denominator;
-
+    destroy_fraction(frac);
+    destroy_fraction(other);
     return cut_fraction(frac);
 }
 
@@ -179,6 +190,7 @@ Fraction* div_fraction(Fraction* frac, Fraction* other)
 {
     frac->numerator = frac->numerator * other->denominator;
     frac->denominator = frac->denominator * other->numerator;
-
+    destroy_fraction(frac);
+    destroy_fraction(other);
     return cut_fraction(frac);
 }
