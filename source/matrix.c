@@ -167,7 +167,6 @@ void swap_rows_matrix(Matrix* matrix, int row1, int row2)
         Fraction* tmp = copy_fraction(matrix->elems[row1][col]);
         set_elem_matrix(matrix, row1, col, matrix->elems[row2][col]);
         matrix->elems[row2][col] = tmp;
-        destroy_fraction(tmp);
     }
 }
 
@@ -178,7 +177,6 @@ void swap_columns_matrix(Matrix* matrix, int col1, int col2)
         Fraction* tmp = copy_fraction(matrix->elems[row][col1]);
         set_elem_matrix(matrix, row, col1, matrix->elems[row][col2]);
         matrix->elems[row][col2] = tmp;
-        destroy_fraction(tmp);
     }
 }
 
