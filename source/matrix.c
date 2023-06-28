@@ -288,7 +288,7 @@ Fraction* det_matrix(Matrix* matrix)
 
     destroy_matrix(matrix);
 
-    return inv_fraction(lambda);
+    return cut_fraction(inv_fraction(lambda));
 }
 
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col)
