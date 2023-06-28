@@ -80,7 +80,7 @@ Matrix* transform_matrix(Matrix* matrix)
 
     for (int i = 0; i < matrix->row; i++)
         for (int j = 0; j < matrix->col; j++)
-            matrix_res->elems[j][i] = matrix->elems[i][j];
+            matrix_res->elems[j][i] = get_elem_matrix(matrix, i, j);
 
     destroy_matrix(matrix);
 
