@@ -269,7 +269,7 @@ void print_matrix(Matrix* matrix)
 {
     for (int i = 0; i < matrix->row; i++) {
         for (int j = 0; j < matrix->col; j++) {
-            print_fraction(matrix->elems[i][j]);
+            print_fraction(get_elem_matrix(matrix, i, j));
             printf("\t");
         }
         printf("\n");
