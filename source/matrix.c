@@ -97,7 +97,7 @@ Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2)
                 set_elem_matrix(matrix_res, i, j,
                                 add_fraction(
                                         get_elem_matrix(matrix_res, i, j),
-                                        add_fraction(
+                                        mul_fraction(
                                                 get_elem_matrix(matrix1, i, k),
                                                 get_elem_matrix(matrix2, k, j)
                                                 )
