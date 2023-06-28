@@ -286,6 +286,8 @@ Fraction* det(Matrix* matrix)
         }
     }
 
+    destroy_matrix(matrix);
+
     return inv_fraction(lambda);
 }
 
