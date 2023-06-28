@@ -75,6 +75,12 @@ Fraction* copy_fraction(Fraction* frac)
 
 Fraction* cut_fraction(Fraction* frac)
 {
+    if (frac->denominator < 0)
+    {
+        frac->numerator *= -1;
+        frac->denominator *= -1;
+    }
+
     int gcd = nod(frac->numerator, frac->denominator);
 
     frac->numerator /= gcd;
