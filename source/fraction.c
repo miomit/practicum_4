@@ -19,7 +19,7 @@ Fraction* new_fraction(int numerator, int denominator)
         }
 
         frac->numerator = numerator;
-        frac->denominator = denominator;
+        frac->denominator = denominator != 0 ? denominator : 1;
     }
 
     return frac;
@@ -85,6 +85,8 @@ Fraction* cut_fraction(Fraction* frac)
 
     frac->numerator /= gcd;
     frac->denominator /= gcd;
+
+    frac->denominator = frac->denominator != 0 ? frac->denominator : 1;
 
     return frac;
 }
