@@ -82,6 +82,8 @@ Matrix* transform_matrix(Matrix* matrix)
         for (int j = 0; j < matrix->col; j++)
             matrix_res->elems[j][i] = matrix->elems[i][j];
 
+    destroy_matrix(matrix);
+
     return matrix_res;
 }
 
@@ -94,12 +96,15 @@ Matrix* mul_matrix(Matrix* matrix1, Matrix* matrix2)
             for (int k = 0; k < matrix1->col; k++)
                 set_elem_matrix(matrix_res, i, j,
                                 add_fraction(
-                                        matrix_res->elems[i][j],
+                                        get_elem_matrix(matrix_res, i, j),
                                         add_fraction(
-                                                matrix1->elems[i][k],
-                                                matrix2->elems[k][j]
+                                                get_elem_matrix(matrix1, i, k),
+                                                get_elem_matrix(matrix2, k, j)
                                                 )
                                         ));
+
+    destroy_matrix(matrix1);
+    destroy_matrix(matrix2);
 
     return matrix_res;
 }
@@ -111,9 +116,12 @@ Matrix* add_matrix(Matrix* matrix1, Matrix* matrix2)
     for (int i = 0; i < matrix_res->row; i++)
         for (int j = 0; j < matrix_res->col; j++)
             matrix_res->elems[i][j] = add_fraction(
-                    matrix1->elems[i][j],
-                    matrix2->elems[i][j]
-                    );
+                    get_elem_matrix(matrix1, i, j),
+                    get_elem_matrix(matrix2, i, j)
+            );
+
+    destroy_matrix(matrix1);
+    destroy_matrix(matrix2);
 
     return matrix_res;
 }
@@ -125,9 +133,12 @@ Matrix* sub_matrix(Matrix* matrix1, Matrix* matrix2)
     for (int i = 0; i < matrix_res->row; i++)
         for (int j = 0; j < matrix_res->col; j++)
             matrix_res->elems[i][j] = sub_fraction(
-                    matrix1->elems[i][j],
-                    matrix2->elems[i][j]
+                    get_elem_matrix(matrix1, i, j),
+                    get_elem_matrix(matrix2, i, j)
             );
+
+    destroy_matrix(matrix1);
+    destroy_matrix(matrix2);
 
     return matrix_res;
 }
@@ -139,11 +150,12 @@ Matrix* mul_frac_matrix(Matrix* matrix, Fraction* frac)
     for (int i = 0; i < matrix_res->row; i++)
         for (int j = 0; j < matrix_res->col; j++)
             matrix_res->elems[i][j] = mul_fraction(
-                    matrix->elems[i][j],
-                    frac
+                    get_elem_matrix(matrix, i, j),
+                    copy_fraction(frac)
             );
 
     destroy_fraction(frac);
+    destroy_matrix(matrix);
 
     return matrix_res;
 }
@@ -155,6 +167,7 @@ void swap_rows_matrix(Matrix* matrix, int row1, int row2)
         Fraction* tmp = copy_fraction(matrix->elems[row1][col]);
         set_elem_matrix(matrix, row1, col, matrix->elems[row2][col]);
         matrix->elems[row2][col] = tmp;
+        destroy_fraction(tmp);
     }
 }
 
@@ -165,6 +178,7 @@ void swap_columns_matrix(Matrix* matrix, int col1, int col2)
         Fraction* tmp = copy_fraction(matrix->elems[row][col1]);
         set_elem_matrix(matrix, row, col1, matrix->elems[row][col2]);
         matrix->elems[row][col2] = tmp;
+        destroy_fraction(tmp);
     }
 }
 
@@ -174,8 +188,8 @@ void mul_frac_row_matrix(Matrix* matrix, int row, Fraction* frac)
     {
         set_elem_matrix(matrix, row, col,
                         mul_fraction(
-                                matrix->elems[row][col],
-                                frac
+                                get_elem_matrix(matrix, row, col),
+                                copy_fraction(frac)
                                 ));
     }
 
@@ -188,12 +202,49 @@ void mul_frac_column_matrix(Matrix* matrix, int col, Fraction* frac)
     {
         set_elem_matrix(matrix, row, col,
                         mul_fraction(
-                                matrix->elems[row][col],
-                                frac
+                                get_elem_matrix(matrix, row, col),
+                                copy_fraction(frac)
                         ));
     }
 
     destroy_fraction(frac);
+}
+
+void row_add_row_mul_frac_matrix(Matrix* matrix, int row1, int row2, Fraction* frac)
+{
+    for (int col = 0; col < matrix->col; col++)
+    {
+        set_elem_matrix( matrix, row1, col, add_fraction(
+                get_elem_matrix(matrix, row1, col),
+                mul_fraction(
+                        get_elem_matrix(matrix, row2, col),
+                        copy_fraction(frac)
+                        )
+                ));
+    }
+
+    destroy_fraction(frac);
+}
+
+void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fraction* frac)
+{
+    for (int row = 0; row < matrix->row; row++)
+    {
+        set_elem_matrix( matrix, row, col1, add_fraction(
+                get_elem_matrix(matrix, row, col1),
+                mul_fraction(
+                        get_elem_matrix(matrix, row, col2),
+                        copy_fraction(frac)
+                )
+        ));
+    }
+
+    destroy_fraction(frac);
+}
+
+Fraction* get_elem_matrix(Matrix* matrix, int row, int col)
+{
+    return copy_fraction(matrix->elems[row][col]);
 }
 
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem)
