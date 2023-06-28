@@ -57,9 +57,10 @@ Matrix* input_matrix(const char* filename, const int index)
             }
             free(fracs);
         }
-
+        fclose(file);
         return matrix;
     }
 
+    fclose(file);
     return NULL;
 }
