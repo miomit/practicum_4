@@ -240,7 +240,7 @@ void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fract
     destroy_fraction(frac);
 }
 
-Fraction* det(Matrix* matrix)
+Fraction* det_matrix(Matrix* matrix)
 {
     Fraction* lambda = new_fraction_num(1);
 

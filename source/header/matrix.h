@@ -28,7 +28,7 @@ void mul_frac_column_matrix(Matrix* matrix, int col, Fraction* frac);
 void row_add_row_mul_frac_matrix(Matrix* matrix, int row1, int row2, Fraction* frac);
 void column_add_column_mul_frac_matrix(Matrix* matrix, int col1, int col2, Fraction* frac);
 
-Fraction* det(Matrix* matrix);
+Fraction* det_matrix(Matrix* matrix);
 
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col);
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
