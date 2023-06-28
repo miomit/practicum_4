@@ -34,6 +34,8 @@ Fraction* det_matrix(Matrix* matrix);
 Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2);
 Matrix* append_h_matrix(Matrix* matrix1, Matrix* matrix2);
 
+Matrix* block_4_4(Matrix* matrix, int row_d, int col_d, int index);
+
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col);
 void set_elem_matrix(Matrix* matrix, int row, int col, Fraction* new_elem);
 

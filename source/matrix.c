@@ -388,6 +388,46 @@ Matrix* append_h_matrix(Matrix* matrix1, Matrix* matrix2)
     return matrix_res;
 }
 
+/*
+    A B
+    C D, where A - 0, B - 1, C - 2, D - 3
+*/
+Matrix* block_4_4(Matrix* matrix, int row_d, int col_d, int index)
+{
+    Matrix* matrix_res;
+
+    switch (index) {
+        case 0:
+            matrix_res = new_matrix(row_d, col_d);
+            for (int i = 0; i < row_d; i++)
+                for (int j = 0; j < col_d; j++)
+                    matrix_res->elems[i][j] = get_elem_matrix(matrix, i, j);
+            break;
+        case 1:
+            matrix_res = new_matrix(row_d, matrix->col - col_d);
+            for (int i = 0; i < matrix_res->row; i++)
+                for (int j = 0; j < matrix_res->col; j++)
+                    matrix_res->elems[i][j] = get_elem_matrix(matrix, i, col_d + j);
+            break;
+        case 2:
+            matrix_res = new_matrix(matrix->row - row_d, col_d);
+            for (int i = 0; i < matrix_res->row; i++)
+                for (int j = 0; j < matrix_res->col; j++)
+                    matrix_res->elems[i][j] = get_elem_matrix(matrix, row_d + i, j);
+            break;
+        default:
+            matrix_res = new_matrix(matrix->row - row_d, matrix->col - col_d);
+            for (int i = 0; i < matrix_res->row; i++)
+                for (int j = 0; j < matrix_res->col; j++)
+                    matrix_res->elems[i][j] = get_elem_matrix(matrix, row_d + i, col_d + j);
+            break;
+    }
+
+    destroy_matrix(matrix);
+
+    return matrix_res;
+}
+
 Fraction* get_elem_matrix(Matrix* matrix, int row, int col)
 {
     return copy_fraction(matrix->elems[row][col]);
