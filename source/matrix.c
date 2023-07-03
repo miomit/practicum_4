@@ -440,9 +440,11 @@ Fraction* det_block_matrix(Matrix* matrix)
     Matrix* C = block_4_4(copy_matrix(matrix), row_d, col_d, 2);
     Matrix* D = block_4_4(copy_matrix(matrix), row_d, col_d, 3);
 
-    Fraction* det_a = det_matrix(copy_matrix(A));
+    if (A->row <= 100)
+    {
+        Fraction* det_a = det_matrix(copy_matrix(A));
 
-    return mul_fraction(det_a,  det_matrix(
+        return mul_fraction(det_a,  det_matrix(
             sub_matrix(
                 D,
                 mul_matrix(
@@ -453,6 +455,23 @@ Fraction* det_block_matrix(Matrix* matrix)
                                 )
                         )
                 )));
+    }
+    else
+    {
+        Fraction* det_a = det_block_matrix(copy_matrix(A));
+
+        return mul_fraction(det_a,  det_block_matrix(
+            sub_matrix(
+                D,
+                mul_matrix(
+                        C,
+                        mul_matrix(
+                                inv_block_matrix(A),
+                                B
+                                )
+                        )
+                )));
+    }
 }
 
 Matrix* append_v_matrix(Matrix* matrix1, Matrix* matrix2)
