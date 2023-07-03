@@ -311,19 +311,42 @@ Matrix* inv_block_matrix(Matrix* matrix)
     Matrix* C = block_4_4(copy_matrix(matrix), row_d, col_d, 2);
     Matrix* D = block_4_4(copy_matrix(matrix), row_d, col_d, 3);
 
-    Matrix* A_inv = inv_matrix(copy_matrix(A));
+    Matrix* A_inv;
 
-    Matrix* H = inv_matrix(
-        sub_matrix(
-            copy_matrix(D),
-            mul_matrix(
-                    copy_matrix(C),
-                    mul_matrix(
-                            copy_matrix(A_inv),
-                            copy_matrix(B)
-                    )
-            )
-    ));
+    Matrix* H;
+
+    if (A->row <= 100)
+    {
+        A_inv = inv_matrix(copy_matrix(A));
+
+        H = inv_matrix(
+            sub_matrix(
+                copy_matrix(D),
+                mul_matrix(
+                        copy_matrix(C),
+                        mul_matrix(
+                                copy_matrix(A_inv),
+                                copy_matrix(B)
+                        )
+                )
+        ));
+    }
+    else
+    {
+        A_inv = inv_block_matrix(copy_matrix(A));
+
+        H = inv_block_matrix(
+            sub_matrix(
+                copy_matrix(D),
+                mul_matrix(
+                        copy_matrix(C),
+                        mul_matrix(
+                                copy_matrix(A_inv),
+                                copy_matrix(B)
+                        )
+                )
+        ));
+    }
 
     Matrix* A_res = add_matrix(
             copy_matrix(A_inv),
